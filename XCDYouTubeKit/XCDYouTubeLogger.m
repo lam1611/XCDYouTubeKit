@@ -23,8 +23,12 @@ static void (^const CocoaLumberjackLogHandler)(NSString * (^)(void), XCDLogLevel
 
 static void (^LogHandler)(NSString * (^)(void), XCDLogLevel, const char *, const char *, NSUInteger) = ^(NSString *(^message)(void), XCDLogLevel level, const char *file, const char *function, NSUInteger line)
 {
-	char *logLevelString = getenv("XCDYouTubeKitLogLevel");
-	NSUInteger logLevelMask = logLevelString ? strtoul(logLevelString, NULL, 0) : (1 << XCDLogLevelError) | (1 << XCDLogLevelWarning);
+//	char *logLevelString = getenv("XCDYouTubeKitLogLevel");
+//	NSUInteger logLevelMask = logLevelString ? strtoul(logLevelString, NULL, 0) : (1 << XCDLogLevelError) | (1 << XCDLogLevelWarning);
+//	if ((1 << level) & logLevelMask)
+//		NSLog(@"[XCDYouTubeKit] %@", message());
+	
+	NSUInteger logLevelMask = (1 << XCDLogLevelError) | (1 << XCDLogLevelWarning) | (1 << XCDLogLevelInfo) | (1 << XCDLogLevelDebug) | (1 << XCDLogLevelVerbose);
 	if ((1 << level) & logLevelMask)
 		NSLog(@"[XCDYouTubeKit] %@", message());
 };
